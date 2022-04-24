@@ -1,0 +1,12 @@
+﻿<h1>Proveedor</h1>
+<div class="container">
+    <h2>Agregar Proveedor</h2>
+    <form method="post" enctype="multipart/form-data" asp-controller="Proveedors" asp-action="Create">
+        <div class="form-group">
+            <label for="Name">Nombre de Proveedor:</label>
+            <input type="text" class="form-control" id="Name" placeholder="Ingresar Nombre de Proveedor" name="Name">
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Agregar</button>
+    </form>
+</div>

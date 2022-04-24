@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>FECHA</th>
+            <th>PRODUCTO</th>
+            <th>PROVEEDOR</th>
+            <th>TIPO DE PAGO</th>
+            <th>TIPO TRANSACCION</th>
+            <th>CANTIDAD</th>
+            <th>COSTO UNITARIO</th>
+            <th>TOTAL</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.RegistroTransaccions)
+        {
+            <tr>
+                <td>@item.Fecha</td>
+                @foreach (var item2 in ViewBag.Productos)
+                {
+                    if (item2.Id == item.IdProducto)
+                    {
+                        <td>@item2.Name</td>
+                    }
+                }
+                @foreach (var item3 in ViewBag.Proveedores)
+                {
+                    if (item3.Id == item.IdProveedor)
+                    {
+                        <td>@item3.Name</td>
+                    }
+                }
+                @foreach (var item4 in ViewBag.TipoPago)
+                {
+                    if (item4.Id == item.IdTipoPago)
+                    {
+                        <td>@item4.Tipo</td>
+                    }
+                }
+                <td>@item.Accion</td>
+                <td>@item.Cantidad</td>
+                <td>@item.CostoUnitario</td>
+                <td>@item.Total</td>
+            </tr>
+        }
+    </tbody>
+</table>

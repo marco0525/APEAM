@@ -11,5 +11,11 @@
         public int Cantidad { get; set; }
         public float CostoUnitario { get; set; }
         public float Total { get; set; }
+
+        public virtual Producto Producto { get; set; }
+
+        public virtual Proveedor Proveedor { get; set; }
+
+        public virtual TipoPago TipoPago { get; set; }
     }
 }

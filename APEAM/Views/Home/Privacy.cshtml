@@ -1,6 +1,38 @@
-﻿@{
+﻿@using ExamenAPEAM.Models;
+@model List<RegistroTransaccion>;
+@{
     ViewData["Title"] = "Privacy Policy";
 }
+<table class="table">
+    <thead>
+        <tr>
+            <th>FECHA</th>
+            <th>PRODUCTO</th>
+            <th>PROVEEDOR</th>
+            <th>TIPO DE PAGO</th>
+            <th>TIPO TRANSACCION</th>
+            <th>CANTIDAD</th>
+            <th>COSTO UNITARIO</th>
+            <th>TOTAL</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.Transacciones)
+        {
+            <tr>
+                <td>@item.Fecha</td>
+                <td>@item.Producto</td>
+                <td>@item.Proveedor</td>
+                <td>@item.TipoPago</td>
+                <td>@item.Accion</td>
+                <td>@item.Cantidad</td>
+                <td>@item.CostoUnitario</td>
+                <td>@item.Total</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 <table class="table">
     <thead>
@@ -17,31 +49,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in ViewBag.RegistroTransaccions)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>@item.Fecha</td>
-                @foreach (var item2 in ViewBag.Productos)
-                {
-                    if (item2.Id == item.IdProducto)
-                    {
-                        <td>@item2.Name</td>
-                    }
-                }
-                @foreach (var item3 in ViewBag.Proveedores)
-                {
-                    if (item3.Id == item.IdProveedor)
-                    {
-                        <td>@item3.Name</td>
-                    }
-                }
-                @foreach (var item4 in ViewBag.TipoPago)
-                {
-                    if (item4.Id == item.IdTipoPago)
-                    {
-                        <td>@item4.Tipo</td>
-                    }
-                }
+                <td>@item.Producto.Name</td>
+                <td>@item.Proveedor.Name</td>
+                <td>@item.TipoPago.Tipo</td>
                 <td>@item.Accion</td>
                 <td>@item.Cantidad</td>
                 <td>@item.CostoUnitario</td>

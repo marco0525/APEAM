@@ -23,7 +23,9 @@ namespace APEAM.Controllers
         // GET: Inventarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Inventario.ToListAsync());
+            return View(await _context.Inventario
+                .Include(p => p.Producto)
+                .Include(p => p.Proveedor).ToListAsync());
         }
 
         // GET: Inventarios/Details/5

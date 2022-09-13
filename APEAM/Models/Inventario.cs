@@ -8,5 +8,9 @@
         public int Cantidad { get; set; }
         public int UltimaTransaccion { get; set; }
         public int Accion { get; set; }
+
+        public virtual Producto Producto { get; set; }
+
+        public virtual Proveedor Proveedor { get; set; }
     }
 }

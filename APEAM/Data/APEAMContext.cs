@@ -15,14 +15,45 @@ namespace APEAM.Data
         {
         }
 
-        public DbSet<ExamenAPEAM.Models.Proveedor> Proveedor { get; set; }
+        public DbSet<Proveedor> Proveedor { get; set; }
 
-        public DbSet<ExamenAPEAM.Models.Producto> Producto { get; set; }
+        public DbSet<Producto> Producto { get; set; }
 
-        public DbSet<ExamenAPEAM.Models.TipoPago> TipoPago { get; set; }
+        public DbSet<TipoPago> TipoPago { get; set; }
 
-        public DbSet<ExamenAPEAM.Models.RegistroTransaccion> RegistroTransaccion { get; set; }
+        public DbSet<RegistroTransaccion> RegistroTransaccion { get; set; }
 
-        public DbSet<ExamenAPEAM.Models.Inventario> Inventario { get; set; }
+        public DbSet<Inventario> Inventario { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Producto>()
+                .HasMany(a => a.Transacciones)
+                .WithOne(a => a.Producto)
+                .HasForeignKey(f => f.IdProducto);
+
+            modelBuilder.Entity<Producto>()
+                .HasMany(a => a.Inventarios)
+                .WithOne(a => a.Producto)
+                .HasForeignKey(f => f.IdProducto);
+
+            modelBuilder.Entity<Proveedor>()
+                .HasMany(a => a.Transacciones)
+                .WithOne(a => a.Proveedor)
+                .HasForeignKey(f => f.IdProveedor);
+
+            modelBuilder.Entity<Proveedor>()
+                .HasMany(a => a.Inventarios)
+                .WithOne(a => a.Proveedor)
+                .HasForeignKey(f => f.IdProveedor);
+
+            modelBuilder.Entity<TipoPago>()
+                .HasMany(a => a.Transacciones)
+                .WithOne(a => a.TipoPago)
+                .HasForeignKey(f => f.IdTipoPago);
+
+        }
     }
 }

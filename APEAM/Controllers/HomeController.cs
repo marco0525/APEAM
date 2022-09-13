@@ -30,11 +30,25 @@ namespace APEAM.Controllers
 
         public IActionResult Privacy()
         {
-            ViewBag.Productos = _context.Producto.ToList();
-            ViewBag.Proveedores = _context.Proveedor.ToList();
-            ViewBag.RegistroTransaccions = _context.RegistroTransaccion.ToList();
-            ViewBag.TipoPago = _context.TipoPago.ToList();
-            return View();
+            var transacciones = _context.RegistroTransaccion
+                .Include(i => i.Producto)
+                .Include(i => i.Proveedor)
+                .Include(i => i.TipoPago);
+            
+            ViewBag.Transacciones = (from t in transacciones 
+                                    select new { 
+                                        t.Id,
+                                        t.Fecha,
+                                        t.Accion,
+                                        t.Cantidad,
+                                        t.CostoUnitario,
+                                        t.Total,
+                                        Producto = t.Producto.Name, 
+                                        Proveedor = t.Proveedor.Name,
+                                        TipoPago = t.TipoPago.Tipo
+                                    }).ToList();
+
+            return View(transacciones.ToList());
         }
         public IActionResult Producto()
         {
